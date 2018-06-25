@@ -23,11 +23,9 @@ import com.fernandocejas.sample.core.extension.inflate
 import com.fernandocejas.sample.core.extension.loadFromUrl
 import com.fernandocejas.sample.core.navigation.Navigator
 import kotlinx.android.synthetic.main.row_movie.view.*
-import javax.inject.Inject
 import kotlin.properties.Delegates
 
-class MoviesAdapter
-@Inject constructor() : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
+class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
     internal var collection: List<MovieView> by Delegates.observable(emptyList()) {
         _, _, _ -> notifyDataSetChanged()

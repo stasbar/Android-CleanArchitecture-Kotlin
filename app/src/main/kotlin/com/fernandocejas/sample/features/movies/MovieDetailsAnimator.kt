@@ -22,11 +22,9 @@ import android.transition.TransitionManager
 import android.view.View
 import android.view.ViewGroup
 import com.fernandocejas.sample.core.extension.cancelTransition
-import javax.inject.Inject
 
 
-class MovieDetailsAnimator
-@Inject constructor() {
+class MovieDetailsAnimator{
 
     private val TRANSITION_DELAY = 200L
     private val TRANSITION_DURATION = 400L

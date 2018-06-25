@@ -15,6 +15,7 @@
  */
 package com.fernandocejas.sample.features.movies
 
+import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.annotation.StringRes
 import android.support.v7.widget.StaggeredGridLayoutManager
@@ -33,22 +34,21 @@ import com.fernandocejas.sample.core.extension.visible
 import com.fernandocejas.sample.core.navigation.Navigator
 import kotlinx.android.synthetic.main.fragment_movies.emptyView
 import kotlinx.android.synthetic.main.fragment_movies.movieList
-import javax.inject.Inject
+import org.koin.android.architecture.ext.viewModel
+import org.koin.android.ext.android.inject
 
 class MoviesFragment : BaseFragment() {
 
-    @Inject lateinit var navigator: Navigator
-    @Inject lateinit var moviesAdapter: MoviesAdapter
+    private val navigator: Navigator by inject()
+    private val moviesAdapter: MoviesAdapter by inject()
 
-    private lateinit var moviesViewModel: MoviesViewModel
+    private val moviesViewModel: MoviesViewModel by viewModel()
 
     override fun layoutId() = R.layout.fragment_movies
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        appComponent.inject(this)
-
-        moviesViewModel = viewModel(viewModelFactory) {
+        with(moviesViewModel){
             observe(movies, ::renderMoviesList)
             failure(failure, ::handleFailure)
         }
@@ -65,7 +65,8 @@ class MoviesFragment : BaseFragment() {
         movieList.layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
         movieList.adapter = moviesAdapter
         moviesAdapter.clickListener = { movie, navigationExtras ->
-                    navigator.showMovieDetails(activity!!, movie, navigationExtras) }
+            navigator.showMovieDetails(activity!!, movie, navigationExtras)
+        }
     }
 
     private fun loadMoviesList() {

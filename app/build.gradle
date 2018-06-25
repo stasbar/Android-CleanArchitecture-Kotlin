@@ -72,9 +72,6 @@ dependencies {
 
   //Compile time dependencies
   kapt applicationDependencies.archComponentsCompiler
-  kapt applicationDependencies.daggerCompiler
-  compileOnly applicationDependencies.javaxAnnotation
-  compileOnly applicationDependencies.javaxInject
 
   //Application dependencies
   implementation applicationDependencies.kotlin
@@ -88,7 +85,9 @@ dependencies {
   implementation applicationDependencies.design
   implementation applicationDependencies.androidAnnotations
   implementation applicationDependencies.glide
-  implementation applicationDependencies.dagger
+  implementation applicationDependencies.koin
+  implementation applicationDependencies.koinAndroid
+  implementation applicationDependencies.koinAndroidArch
   implementation applicationDependencies.retrofit
   implementation applicationDependencies.okhttpLoggingInterceptor
 

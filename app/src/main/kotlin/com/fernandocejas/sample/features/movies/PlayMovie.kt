@@ -23,11 +23,9 @@ import com.fernandocejas.sample.core.functional.Either.Right
 import com.fernandocejas.sample.core.interactor.UseCase
 import com.fernandocejas.sample.core.interactor.UseCase.None
 import com.fernandocejas.sample.core.navigation.Navigator
-import javax.inject.Inject
 
-class PlayMovie
-@Inject constructor(private val context: Context,
-                    private val navigator: Navigator) : UseCase<None, Params>() {
+class PlayMovie(private val context: Context,
+                private val navigator: Navigator) : UseCase<None, Params>() {
 
     override suspend fun run(params: Params): Either<Failure, None> {
         navigator.openVideo(context, params.url)

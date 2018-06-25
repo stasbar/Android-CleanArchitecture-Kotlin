@@ -23,15 +23,13 @@ import com.fernandocejas.sample.core.functional.Either.Left
 import com.fernandocejas.sample.core.functional.Either.Right
 import com.fernandocejas.sample.core.platform.NetworkHandler
 import retrofit2.Call
-import javax.inject.Inject
 
 interface MoviesRepository {
     fun movies(): Either<Failure, List<Movie>>
     fun movieDetails(movieId: Int): Either<Failure, MovieDetails>
 
-    class Network
-    @Inject constructor(private val networkHandler: NetworkHandler,
-                        private val service: MoviesService) : MoviesRepository {
+    class Network(private val networkHandler: NetworkHandler,
+                  private val service: MoviesService) : MoviesRepository {
 
         override fun movies(): Either<Failure, List<Movie>> {
             return when (networkHandler.isConnected) {
