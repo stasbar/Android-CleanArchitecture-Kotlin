@@ -23,7 +23,7 @@ class MoviesViewModel(private val getMovies: GetMovies) : BaseViewModel() {
 
     var movies: MutableLiveData<List<MovieView>> = MutableLiveData()
 
-    fun loadMovies() = getMovies.execute({ it.either(::handleFailure, ::handleMovieList) }, None())
+    fun loadMovies() = getMovies(None()) { it.either(::handleFailure, ::handleMovieList) }
 
     private fun handleMovieList(movies: List<Movie>) {
         this.movies.value = movies.map { MovieView(it.id, it.poster) }
